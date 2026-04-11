@@ -1,7 +1,3 @@
-#include <print>
+import std;
 
-
-
-int main() {
-    std::println("Hello, world!");
-}
+int main() { std::println("Hello, world!"); }

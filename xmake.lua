@@ -3,14 +3,41 @@ set_languages("c++23")
 set_warnings("all")
 set_policy("build.c++.modules", true)
 
-local llvm_bindir = os.getenv("LLVM_BINDIR")
-if llvm_bindir and #llvm_bindir > 0 then
-    set_toolset("cxx", path.join(llvm_bindir, "clang++"))
+-- This project currently assumes a macOS + Homebrew LLVM layout for C++ modules.
+-- TODO: Linux support
+--   - Detect an LLVM/libc++ install path such as /usr/lib/llvm-*/ or /usr/local.
+--   - Point xmake at clang++ and the matching libc++ modules metadata/std.cppm.
+-- TODO: Windows support
+--   - Decide whether to support LLVM/clang-cl + libc++ modules or MSVC's modules flow.
+--   - Add platform-specific compiler, SDK, and module metadata discovery.
+if not is_host("macosx") then
+    raise("this xmake.lua currently supports macOS only")
 end
 
-local llvm_sdk = os.getenv("LLVM_PREFIX")
-if llvm_sdk and #llvm_sdk > 0 then
-    set_values("sdk", llvm_sdk)
+local function nonempty(value)
+    return value and #value > 0
+end
+
+local llvm_prefix = os.getenv("LLVM_PREFIX")
+local llvm_bindir = os.getenv("LLVM_BINDIR")
+
+if not nonempty(llvm_prefix) and os.isdir("/opt/homebrew/opt/llvm") then
+    llvm_prefix = "/opt/homebrew/opt/llvm"
+end
+
+if not nonempty(llvm_bindir) and nonempty(llvm_prefix) then
+    llvm_bindir = path.join(llvm_prefix, "bin")
+end
+
+if nonempty(llvm_bindir) then
+    local clangxx = path.join(llvm_bindir, "clang++")
+    if os.isfile(clangxx) then
+        set_toolset("cxx", clangxx)
+    end
+end
+
+if nonempty(llvm_prefix) then
+    set_values("sdk", llvm_prefix)
 end
 
 local module_sources = os.files("*.cppm")
