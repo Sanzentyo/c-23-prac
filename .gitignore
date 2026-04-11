@@ -1,0 +1,8 @@
+/.zig-cache/
+/zig-out/
+/zig-cache/
+/*.o
+/*.obj
+/*.exe
+/*.dSYM/
+/hello-direct
