@@ -4,13 +4,20 @@ default:
   @just --list
 
 list:
-  @zig build --list-steps
+  xmake show -l targets
 
 build name:
-  zig build -Dname={{name}}
+  xmake build {{name}}
 
 run name:
-  zig build run -Dname={{name}}
+  xmake run {{name}}
 
 check name:
+  xmake project -k compile_commands
   clangd --check={{name}}.cpp
+
+compdb:
+  xmake project -k compile_commands
+
+clean:
+  xmake clean
