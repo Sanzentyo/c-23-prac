@@ -42,7 +42,7 @@ template <Drawable T> struct DrawableShape {
 int main() {
   auto circle = Circle{.radius = 5};
   auto square = Rectanlge{.width = 10, .height = 15};
-  auto notDrawableCircle = NotDrawableCircle{};
+  //auto notDrawableCircle = NotDrawableCircle{};
 
   // Rustみたい(Box<Trait>)に動的dispatchをするのは難しそう
   // auto drawableShapes = std::vector<&Drawable>{circle, square};
