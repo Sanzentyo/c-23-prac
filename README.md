@@ -1,6 +1,6 @@
 # c-23-prac
 
-Minimal C++23 practice project using Xmake as the build system.
+Minimal C++23 practice project using Xmake as the build system.(一部C++26の機能も使用)
 
 ## Requirements
 

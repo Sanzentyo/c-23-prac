@@ -1,9 +1,6 @@
 /.xmake/
 /build/
 /.zed/
-/.zig-cache/
-/zig-out/
-/zig-cache/
 /*.o
 /*.obj
 /*.exe

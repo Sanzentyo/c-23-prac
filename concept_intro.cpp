@@ -1,8 +1,8 @@
 /// Conceptを使って色々書いてみる
 /// https://cpprefjp.github.io/lang/cpp20/concepts.html
 
-#include <cstdint>
 import std;
+#include <cstdint>
 #include <concepts>
 
 template <typename T>
