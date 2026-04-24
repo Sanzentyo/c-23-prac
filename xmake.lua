@@ -40,15 +40,18 @@ if nonempty(llvm_prefix) then
     set_values("sdk", llvm_prefix)
 end
 
-local module_sources = os.files("*.cppm")
+target("practice_support")
+    set_kind("static")
+    add_files("src/lib/*.cpp")
+    add_headerfiles("src/lib/*.hpp")
+    add_includedirs("src/lib", {public = true})
 
-for _, source in ipairs(os.files("*.cpp")) do
+for _, source in ipairs(os.files("src/bin/*.cpp")) do
     local name = path.basename(source)
 
     target(name)
         set_kind("binary")
         add_files(source)
-        if #module_sources > 0 then
-            add_files(table.unpack(module_sources))
-        end
+        add_deps("practice_support")
+        add_includedirs("src/lib")
 end

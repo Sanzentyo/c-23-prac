@@ -43,6 +43,9 @@ Generate `compile_commands.json` for `clangd`:
 xmake project -k compile_commands
 ```
 
+Source files live under `src/`. Each `src/<name>.cpp` becomes an executable target named `<name>`.
+Executables live under `src/bin/`. Shared code lives under `src/lib/`.
+
 ## just
 
 This repository also includes a `justfile` as a thin task runner.

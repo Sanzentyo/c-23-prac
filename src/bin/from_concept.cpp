@@ -1,6 +1,7 @@
 // RustのFrom<T> Traitのようなものを実装してみる
 import std;
 #include <concepts>
+#include "../lib/practice_support.hpp"
 
 template <typename T, typename U>
 concept From = requires(T t, U u) {
@@ -37,6 +38,7 @@ template <> struct std::formatter<MyInt> {
 
 
 auto main() -> int {
+  practice::print_heading("from_concept");
   static_assert(From<MyInt, int>, "MyInt should implement From<int>");
 
   auto myInt = into<MyInt>(42);

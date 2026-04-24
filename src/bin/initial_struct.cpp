@@ -2,6 +2,7 @@
 
 #include <functional>
 import std;
+#include "../lib/practice_support.hpp"
 
 struct PrintOnConstruct {
   PrintOnConstruct(std::string &&message) {
@@ -17,6 +18,7 @@ struct Hoge {
 };
 
 auto main() -> int {
+  practice::print_heading("initial_struct");
   auto hoge = Hoge{[](std::string &&message) {
     return PrintOnConstruct{std::move(message)};
   }, "Hoge"};

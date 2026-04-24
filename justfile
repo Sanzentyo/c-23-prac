@@ -14,7 +14,7 @@ run name:
 
 check name:
   xmake project -k compile_commands
-  clangd --check={{name}}.cpp
+  if [[ -x /opt/homebrew/opt/llvm/bin/clangd ]]; then /opt/homebrew/opt/llvm/bin/clangd --check=src/bin/{{name}}.cpp; else clangd --check=src/bin/{{name}}.cpp; fi
 
 compdb:
   xmake project -k compile_commands

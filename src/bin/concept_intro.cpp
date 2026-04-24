@@ -4,6 +4,7 @@
 import std;
 #include <cstdint>
 #include <concepts>
+#include "../lib/practice_support.hpp"
 
 template <typename T>
 concept Drawable = requires(T a) {
@@ -40,6 +41,7 @@ template <Drawable T> struct DrawableShape {
 };
 
 int main() {
+  practice::print_heading("concept_intro");
   auto circle = Circle{.radius = 5};
   auto square = Rectanlge{.width = 10, .height = 15};
   //auto notDrawableCircle = NotDrawableCircle{};
