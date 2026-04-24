@@ -1,6 +1,5 @@
 // RustのFrom<T> Traitのようなものを実装してみる
 import std;
-#include <concepts>
 #include "../lib/practice_support.hpp"
 
 template <typename T, typename U>
@@ -23,15 +22,19 @@ auto into(U u) -> T {
 struct MyInt {
   int value;
 
-  static auto from(int v) -> MyInt { return MyInt{v}; }
+  static MyInt from(int v) { return MyInt{v}; }
 };
 
 // formatterをMyIntへ特殊化
 template <> struct std::formatter<MyInt> {
-  constexpr auto parse(std::format_parse_context &ctx) { return ctx.begin(); }
+  constexpr std::format_parse_context::iterator parse(
+      std::format_parse_context &ctx) {
+    return ctx.begin();
+  }
 
   template <typename FormatContext>
-  auto format(const MyInt &myInt, FormatContext &ctx) const {
+  typename FormatContext::iterator format(const MyInt &myInt,
+                                          FormatContext &ctx) const {
     return std::format_to(ctx.out(), "{}", myInt.value);
   }
 };

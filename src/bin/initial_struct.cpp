@@ -1,6 +1,5 @@
 // 初期化時のコンストラクタの実行順序を確認
 
-#include <functional>
 import std;
 #include "../lib/practice_support.hpp"
 

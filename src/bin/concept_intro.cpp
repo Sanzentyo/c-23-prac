@@ -2,8 +2,6 @@
 /// https://cpprefjp.github.io/lang/cpp20/concepts.html
 
 import std;
-#include <cstdint>
-#include <concepts>
 #include "../lib/practice_support.hpp"
 
 template <typename T>
@@ -12,13 +10,13 @@ concept Drawable = requires(T a) {
 };
 
 struct Circle {
-  uint32_t radius;
+  std::uint32_t radius;
   void draw() { std::println("Drawing a circle, radius: {}", radius); }
 };
 
 struct Rectanlge {
-  uint32_t width;
-  uint32_t height;
+  std::uint32_t width;
+  std::uint32_t height;
   void draw() {
     std::println("Drawing a rectangle, width: {}, height: {}", width, height);
   }
