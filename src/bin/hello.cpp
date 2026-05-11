@@ -1,5 +1,5 @@
 import std;
-#include "../lib/practice_support.hpp"
+import practice_support;
 
 int main() {
   practice::print_heading("hello");

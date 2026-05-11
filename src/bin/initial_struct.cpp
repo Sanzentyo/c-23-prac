@@ -1,7 +1,7 @@
 // 初期化時のコンストラクタの実行順序を確認
 
 import std;
-#include "../lib/practice_support.hpp"
+import practice_support;
 
 struct PrintOnConstruct {
   PrintOnConstruct(std::string &&message) {

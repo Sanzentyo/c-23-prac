@@ -15,7 +15,6 @@ if not is_host("macosx") then
 end
 
 local llvm_prefix = os.getenv("LLVM_PREFIX")
-local llvm_bindir = os.getenv("LLVM_BINDIR")
 
 if not llvm_prefix or #llvm_prefix == 0 then
     if os.isdir("/opt/homebrew/opt/llvm") then
@@ -25,26 +24,7 @@ if not llvm_prefix or #llvm_prefix == 0 then
     end
 end
 
-if not llvm_bindir then
-    llvm_bindir = path.join(llvm_prefix, "bin")
-elseif #llvm_bindir == 0 then
-    raise("LLVM_BINDIR is empty")
-end
-llvm_bindir = assert(llvm_bindir)
-
-local clangxx = path.join(llvm_bindir, "clang++")
-if not os.isfile(clangxx) then
-    raise("clang++ not found: " .. clangxx)
-end
-
-set_toolset("cxx", clangxx)
-set_values("sdk", llvm_prefix)
-
-target("practice_support")
-    set_kind("static")
-    add_files("src/lib/*.cpp")
-    add_headerfiles("src/lib/*.hpp")
-    add_includedirs("src/lib", { public = true })
+set_toolchains("llvm", {sdk = llvm_prefix})
 
 for _, source in ipairs(os.files("src/bin/*.cpp")) do
     local name = path.basename(source)
@@ -52,6 +32,5 @@ for _, source in ipairs(os.files("src/bin/*.cpp")) do
     target(name)
         set_kind("binary")
         add_files(source)
-        add_deps("practice_support")
-        add_includedirs("src/lib")
+        add_files("src/lib/*.cppm")
 end

@@ -10,11 +10,16 @@ Minimal C++23 practice project using Xmake as the build system.(一部C++26の�
 
 On macOS, the system `clangd` may be too old for modules. A Homebrew LLVM install is recommended.
 
-If LLVM isn't your default toolchain, point Xmake and your editor at it:
+If LLVM isn't your default toolchain, set `LLVM_PREFIX` so xmake can find it:
 
 ```sh
 export LLVM_PREFIX=/opt/homebrew/opt/llvm
-export LLVM_BINDIR=/opt/homebrew/opt/llvm/bin
+```
+
+Alternatively, pass the SDK path directly:
+
+```sh
+xmake f --toolchain=llvm --sdk=/opt/homebrew/opt/llvm
 ```
 
 ## Usage
@@ -65,7 +70,7 @@ just check hello
 If editor diagnostics for modules do not work on a fresh clone:
 
 1. Install a recent LLVM toolchain.
-2. Point `LLVM_PREFIX` and `LLVM_BINDIR` at that toolchain if it isn't your default.
+2. Point `LLVM_PREFIX` at that toolchain if it isn't your default.
 3. Ensure your editor uses that `clangd`.
 4. Run `xmake build hello` once to generate module artifacts.
 5. Run `xmake project -k compile_commands`.

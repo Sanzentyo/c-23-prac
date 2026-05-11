@@ -2,7 +2,7 @@
 /// https://cpprefjp.github.io/lang/cpp20/concepts.html
 
 import std;
-#include "../lib/practice_support.hpp"
+import practice_support;
 
 template <typename T>
 concept Drawable = requires(T a) {

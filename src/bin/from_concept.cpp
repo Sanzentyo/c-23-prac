@@ -1,6 +1,6 @@
 // RustのFrom<T> Traitのようなものを実装してみる
 import std;
-#include "../lib/practice_support.hpp"
+import practice_support;
 
 template <typename T, typename U>
 concept From = requires(T t, U u) {
