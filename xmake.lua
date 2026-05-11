@@ -20,7 +20,7 @@ if not llvm_prefix or #llvm_prefix == 0 then
     if os.isdir("/opt/homebrew/opt/llvm") then
         llvm_prefix = "/opt/homebrew/opt/llvm"
     else
-        raise("LLVM_PREFIX is not set and /opt/homebrew/opt/llvm was not found")
+        error("LLVM_PREFIX is not set and /opt/homebrew/opt/llvm was not found")
     end
 end
 
