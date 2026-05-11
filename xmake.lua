@@ -11,7 +11,7 @@ set_policy("build.c++.modules", true)
 --   - Decide whether to support LLVM/clang-cl + libc++ modules or MSVC's modules flow.
 --   - Add platform-specific compiler, SDK, and module metadata discovery.
 if not is_host("macosx") then
-    raise("this xmake.lua currently supports macOS only")
+    error("this xmake.lua currently supports macOS only")
 end
 
 local llvm_prefix = os.getenv("LLVM_PREFIX")
